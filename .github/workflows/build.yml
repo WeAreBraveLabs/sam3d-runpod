@@ -46,4 +46,5 @@ jobs:
           push: true
           tags: wearebravelabs/sam3d-runpod:latest
           platforms: linux/amd64
-          no-cache: true
+          cache-from: type=registry,ref=wearebravelabs/sam3d-runpod:buildcache
+          cache-to: type=registry,ref=wearebravelabs/sam3d-runpod:buildcache,mode=max
