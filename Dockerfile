@@ -3,7 +3,7 @@
 # - Uses RunPod's built-in model caching
 # - Requires 32GB+ VRAM (A100/H100 recommended)
 
-FROM runpod/pytorch:2.5.1-py3.11-cuda12.1.1-devel-ubuntu22.04
+FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
@@ -34,12 +34,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Upgrade pip and install build tools
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel ninja
 
-# Install PyTorch (should match base image but ensure compatibility)
-RUN pip install --no-cache-dir \
-    torch==2.5.1 \
-    torchvision==0.20.1 \
-    torchaudio==2.5.1 \
-    --index-url https://download.pytorch.org/whl/cu121
+# Base image already has PyTorch 2.4.0 with CUDA 12.4
 
 # Install flash-attn (required for A100/H100 performance)
 RUN pip install --no-cache-dir --no-build-isolation flash-attn==2.8.3
@@ -86,7 +81,7 @@ RUN pip install --no-cache-dir \
     kornia \
     roma==1.5.1 \
     xformers \
-    spconv-cu121==2.3.8 \
+    spconv-cu120==2.3.8 \
     point-cloud-utils \
     pymeshfix \
     pyrender \
