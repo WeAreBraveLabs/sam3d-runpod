@@ -44,7 +44,7 @@ RUN pip install --no-cache-dir --no-build-isolation \
     "pytorch3d @ git+https://github.com/facebookresearch/pytorch3d.git@75ebeeaea0908c5527e7b1e305fbc7681382db47"
 
 # Install kaolin (required for 3D visualization and rendering)
-RUN pip install --no-cache-dir kaolin==0.17.0
+RUN pip install --no-cache-dir kaolin==0.17.0 -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.4.0_cu124.html
 
 # Install gsplat (specific commit for SAM3D compatibility)
 RUN pip install --no-cache-dir \
