@@ -36,12 +36,13 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel ninja
 
 # Base image already has PyTorch 2.4.0 with CUDA 12.4
 
-# Install flash-attn (required for A100/H100 performance)
-RUN pip install --no-cache-dir --no-build-isolation flash-attn==2.8.3
+# Install flash-attn from pre-built wheel (avoids 30+ min compilation)
+RUN pip install --no-cache-dir flash-attn --no-build-isolation \
+    -f https://github.com/Dao-AILab/flash-attention/releases/expanded_assets/v2.8.3
 
-# Install pytorch3d from source (specific commit for SAM3D compatibility)
-RUN pip install --no-cache-dir --no-build-isolation \
-    "pytorch3d @ git+https://github.com/facebookresearch/pytorch3d.git@75ebeeaea0908c5527e7b1e305fbc7681382db47"
+# Install pytorch3d from pre-built wheel
+RUN pip install --no-cache-dir pytorch3d \
+    -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py311_cu124_pyt240/download.html
 
 # Install kaolin (required for 3D visualization and rendering)
 RUN pip install --no-cache-dir kaolin==0.17.0 -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.4.0_cu124.html
