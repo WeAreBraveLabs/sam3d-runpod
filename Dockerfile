@@ -100,7 +100,7 @@ RUN python patching/hydra
 WORKDIR /app
 
 # Set Python path
-ENV PYTHONPATH="/app/sam-3d-objects:/app:${PYTHONPATH}"
+ENV PYTHONPATH="/app/sam-3d-objects:/app${PYTHONPATH:+:$PYTHONPATH}"
 
 # Copy handler
 COPY handler.py /app/handler.py
